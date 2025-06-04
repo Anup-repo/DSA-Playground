@@ -57,8 +57,9 @@ class Solution:
             jump2 = float('inf')
             if i > 1:
                 jump2 = abs(arr[i] - arr[i - 2]) + prev2
+            cur = min(jump1, jump2)
             prev2 = prev
-            prev = min(jump1, jump2)
+            prev = cur
 
         return prev
     

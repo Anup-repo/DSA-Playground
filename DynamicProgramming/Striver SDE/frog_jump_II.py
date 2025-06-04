@@ -1,5 +1,9 @@
 class Solution:
     def frog_jump_II(self,stones,i,n,k):
+        """
+        Time complexity: O(nk)
+        Space complexity: O(1)
+        """
         if i == n - 1:
             return 0  # already at the end
         if i >= n:
@@ -13,6 +17,10 @@ class Solution:
         return result
         
     def frog_jump_II_memo(self,stones,i,n,k,dp):
+        """
+        Time complexity: O(nk)
+        Space complexity: O(n)
+        """
         if i == n - 1:
             return 0
         if i >= n:
@@ -28,6 +36,10 @@ class Solution:
         return dp[i]
     
     def frog_jump_II_bottom_up(self,stones,k):
+        """
+        Time complexity: O(nk)
+        Space complexity: O(n)
+        """
         n = len(stones)
         dp = [float("inf")] * n
         dp[0] = 0

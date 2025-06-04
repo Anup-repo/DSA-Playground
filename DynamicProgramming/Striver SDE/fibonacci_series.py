@@ -40,7 +40,7 @@ class Solution:
             c = a+b
             a = b
             b = c
-        return c
+        return b
     
 # Example usage:
 n = 0
