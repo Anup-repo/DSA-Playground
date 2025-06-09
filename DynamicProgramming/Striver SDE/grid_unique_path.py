@@ -43,7 +43,7 @@ class Solution:
         # Space Complexity: O(n*m)
 
     def  uniquePaths_bottom_up(self, m: int, n: int) -> int:
-        dp = [[0] * n for _ in range(m)]
+        dp = [[-1] * n for _ in range(m)]
 
         dp[0][0] = 1
 
