@@ -87,6 +87,7 @@ class Solution:
                 dp[arr[0]] = True
             for i in range(1, n):
                 temp = [False] * (target_sum + 1)
+                temp[0] = True
                 for target in range(1, target_sum + 1):
                     not_pick = dp[target]
                     pick = False
