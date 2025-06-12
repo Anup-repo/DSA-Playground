@@ -44,36 +44,45 @@ class Solution:
     def isSubsetSumBottomUp(self, arr, sum):
         n = len(arr)
         # dp[i][j] represents number of ways to get sum j using first i elements
-        dp = [[0] * (sum + 1) for _ in range(n + 1)]
+        dp = [[0] * (sum + 1) for _ in range(n)]
 
-        # Base case: There's exactly 1 way to get sum 0 (empty subset)
-        for i in range(n+1):
-            dp[i][0] = 1
+        if arr[0] == 0:
+            dp[0][0] = 2
+        else:
+            dp[0][0] = 1
+        
+        if arr[0] != 0 and arr[0] <= sum:
+            dp[0][arr[0]] = 1
 
-        for i in range(1, n+1):
-            for target in range(sum + 1):  # Start from 0, not 1
+        for i in range(1, n):
+            # why from 0 to sum + 1?
+            # because we want to include sum 0
+            for target in range(sum + 1):
                 # Don't pick current element
                 not_pick = dp[i - 1][target]
                 
                 # Pick current element (if possible)
                 pick = 0
-                if arr[i - 1] <= target:
-                    pick = dp[i - 1][target - arr[i - 1]]
+                if arr[i] <= target:
+                    pick = dp[i - 1][target - arr[i]]
                 
                 dp[i][target] = pick + not_pick
 
-        return dp[n][sum]
+        return dp[n-1][sum]
 
     def isSubsetSumSpaceOptimized(self, arr, sum):
         n = len(arr)
         dp = [0] * (sum + 1)
-        dp[0] = 1  # There's 1 way to get sum 0
+        if arr[0] == 0:
+            dp[0] = 2
+        else:
+            dp[0] = 1
         
-        for i in range(n):
-            # Create new array for current iteration
-            new_dp = [0] * (sum + 1)
-            new_dp[0] = 1  # Always 1 way to get sum 0
-            
+        if arr[0] != 0 and arr[0] <= sum:
+            dp[arr[0]] = 1
+
+        for i in range(1, n):
+            temp = [0] * (sum + 1)
             for target in range(sum + 1):
                 # Don't pick current element
                 not_pick = dp[target]
@@ -83,10 +92,9 @@ class Solution:
                 if arr[i] <= target:
                     pick = dp[target - arr[i]]
                 
-                new_dp[target] = pick + not_pick
-            
-            dp = new_dp
-        
+                temp[target] = pick + not_pick
+            dp = temp
+
         return dp[sum]
 
 

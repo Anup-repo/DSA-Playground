@@ -27,6 +27,29 @@ class Solution:
                 dp[i][target] = pick or not_pick
         return dp[n-1][target_sum]
     
+    def isSubsetSumSpaceOptimized(self, nums: List[int]) -> bool:
+        target_sum = sum(nums)
+        if target_sum % 2 != 0:
+            return False
+        target_sum = target_sum // 2
+
+        n = len(nums)
+        dp = [False] * (target_sum + 1)
+        dp[0] = True
+        if nums[0] <= target_sum:
+            dp[nums[0]] = True
+        for i in range(1,n):
+            temp = [False] * (target_sum + 1)
+            temp[0] = True
+            for target in range(1,target_sum + 1):
+                not_pick = dp[target]
+                pick = False
+                if nums[i] <= target:
+                    pick = dp[target-nums[i]]
+                temp[target] = pick or not_pick
+            dp = temp
+        return dp[target_sum]
+    
     def canPartition(self, nums: List[int]) -> bool:
         total_sum = sum(nums)
         if total_sum % 2 != 0:
@@ -38,3 +61,4 @@ class Solution:
 sol = Solution()
 nums = [1, 5, 11, 5]
 print(sol.canPartition(nums))  # Output: True, because we can partition it into [1, 5, 5] and [11]
+print(sol.isSubsetSumSpaceOptimized(nums))
