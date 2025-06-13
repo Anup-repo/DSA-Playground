@@ -55,7 +55,7 @@ class Solution:
             for amount in range(target_amount + 1):
                 not_use_coin = dp[coin_index - 1][amount]
                 use_coin = float('inf')
-                if amount >= coins[coin_index]:
+                if coins[coin_index] <= amount:
                     use_coin = 1 + dp[coin_index][amount - coins[coin_index]]
                 dp[coin_index][amount] = min(not_use_coin, use_coin)
         return dp[num_coins - 1][target_amount] if dp[num_coins - 1][target_amount] != float('inf') else -1
