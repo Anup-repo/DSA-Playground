@@ -41,7 +41,7 @@ def ninja_training_memo(n: int, points: List[List[int]], last_task: int, day: in
 
 def ninja_training_tabulation(n: int, points: List[List[int]], last_task: int, day: int) -> int:
     """
-    Time complexity: O(n) where n is the number of days
+    Time complexity:  O(N*4*3) where n is the number of days
     Space complexity: O(n) for the dp array
     """
     dp = [[0] * 4 for _ in range(n)]
@@ -89,7 +89,7 @@ def ninja_training_space_optimization(n: int, points: List[List[int]], last_task
     return prev[3]
 
 points = [[1, 2, 5], [3, 1, 1], [3, 3, 3]]
-task = 3 # try (0,1,2) 
+task = 3 # try (0,1,2,3) 
 n = 3
 print(ninja_training(n, points, task, 0))
 

@@ -55,11 +55,11 @@ class Solution:
             n = len(arr)
             dp = [[False] * (target_sum + 1) for _ in range(n)]
 
-            # Base Case: sum 0 is always possible with empty subset
+            # Base Case: sum 0 is always possible with any subset
             for i in range(n):
                 dp[i][0] = True
 
-            # Can we reach the sum arr[0] using just the first element?
+            # Can we reach the sum using just the first element?
             if arr[0] <= target_sum:
                 dp[0][arr[0]] = True
 
